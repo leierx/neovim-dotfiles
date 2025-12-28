@@ -1,0 +1,3 @@
+ - [ ] more lsp's
+ - [ ] autocomplete
+ - [ ] popup terminal
