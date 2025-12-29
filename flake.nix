@@ -5,7 +5,7 @@
       homeManagerModules.default =
         { pkgs, ... }:
         {
-          xdg.configFile."nvim".source = ./nvim;
+          xdg.configFile."nvim".source = ./.;
 
           home.packages = with pkgs; [
             ripgrep
