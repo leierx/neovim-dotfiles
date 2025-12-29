@@ -1,36 +1,47 @@
 local o = vim.opt
 
--- wrapping
-o.showbreak = "↳ "
-o.linebreak = true -- break at newlines, not last char
+-- Wrapping
+o.linebreak = true -- wrap at word boundaries (not mid-word)
+o.showbreak = "↳ " -- prefix for wrapped lines
+o.breakindent = true -- keep indentation on wrapped lines
+o.breakindentopt = "shift:2"
 
 -- UI
-o.cmdheight = 0         -- experimental
-o.showcmd = false       -- just more overhead when cmdheight is 0
-o.termguicolors = true  -- 24-bit colors
-o.laststatus = 3        -- only one statusline to rule them all
-o.winborder = "rounded" -- windows default to rouded borders. looks nice
+o.cmdheight = 0 -- use the cmdline only when needed (experimental)
+o.laststatus = 3 -- global statusline
+o.showcmd = false -- redundant/noisy with cmdheight=0
+o.signcolumn = "yes" -- avoid text shifting when signs appear
+o.termguicolors = true -- 24-bit colors
+o.winborder = "rounded" -- default border style for floating windows
+o.completeopt = { "menuone", "noselect" }
 
--- Indentation & tab behaviour
-o.expandtab = true   -- insert spaces instead of tab characters
-o.shiftwidth = 2     -- number of spaces for each indent level
-o.tabstop = 2        -- display width of a tab character
-o.softtabstop = 2    -- how <Tab> and <BS> behave in insert mode
-o.smartindent = true -- auto-indent new lines based on syntax
+-- Indentation & tabs
+o.expandtab = true -- insert spaces instead of literal tabs
+o.shiftwidth = 2 -- indent size for << and >>, autoindent, etc.
+o.smartindent = true -- basic smart autoindent
+o.softtabstop = 2 -- <Tab>/<BS> behave like 2-space indent steps
+o.tabstop = 2 -- visual width of a tab character
 
--- Line numbers & gutters
+-- Line numbers & scrolling
 o.number = true
 o.relativenumber = true
+o.scrolloff = 4 -- keep a little context above/below the cursor
 
 -- Search
-o.smartcase = true
+o.ignorecase = true -- case-insensitive search...
+o.smartcase = true -- ...unless the pattern contains uppercase
 
--- blablabla
-o.swapfile = false
-o.clipboard = "unnamedplus"
+-- Splits
+o.splitbelow = true -- new horizontal splits go below
+o.splitright = true -- new vertical splits go right
 
--- Comments
-o.formatoptions = o.formatoptions - { "c", "r", "o" }
+-- Files & undo
+o.swapfile = false -- disable swapfile
+o.undofile = true -- persistent undo across sessions
+
+-- Clipboard
+o.clipboard = "unnamedplus" -- use system clipboard
 
 -- Mouse
-o.mouse = ""
+o.mouse = "" -- disable mouse
+

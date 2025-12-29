@@ -1,35 +1,31 @@
 return {
-  "nvim-mini/mini.nvim",
-  version = "*", -- stable branch
-  lazy = false,
-  config = function()
-    require("mini.cursorword").setup()
-    require("mini.pairs").setup()
-
-    require("mini.animate").setup({ cursor = { enable = false } })
-    require("mini.splitjoin").setup({ mappings = { toggle = "", split = "", join = "" } })
-
-    vim.keymap.set("n", "s", "<Nop>", { desc = "use `cl` or `r`" })
-    require("mini.surround").setup({
-      silent = false,
-      mappings = { find = "", find_left = "", highlight = "", suffix_last = "", suffix_next = "" },
-    })
-
-    vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { link = "NonText" })
-    vim.api.nvim_set_hl(0, "MiniIndentscopeSymbolOff", { link = "NonText" })
-    require("mini.indentscope").setup({
-      draw = { animation = require("mini.indentscope").gen_animation.none() },
+  { "nvim-mini/mini.cursorword", version = "*", config = true },
+  { "nvim-mini/mini.pairs", version = "*", config = true },
+  { "nvim-mini/mini.animate", version = "*", opts = { cursor = { enable = false } } },
+  { "nvim-mini/mini.splitjoin", version = "*", opts = { mappings = { toggle = "", split = "", join = "" }, } },
+  {
+    "nvim-mini/mini.surround",
+    version = "*",
+    init = function() vim.keymap.set("n", "s", "<Nop>", { desc = "use `cl` or `r`" }) end,
+    opts = { mappings = { find = "", find_left = "", highlight = "", suffix_last = "", suffix_next = "" } },
+  },
+  {
+    "nvim-mini/mini.indentscope",
+    version = "*",
+    opts = {
+      draw = { animation = function() return 0 end }, -- disable distracting animation
       mappings = { object_scope = "", object_scope_with_border = "", goto_top = "", goto_bottom = "" },
       symbol = "│",
-      options = { try_as_border = true },
-    })
-
-    require("mini.diff").setup({
+      options = { indent_at_cursor = false },
+    }
+  },
+  {
+    "nvim-mini/mini.diff",
+    version = "*",
+    opts = {
       view = { style = "number" },
       mappings = { apply = "", reset = "", textobject = "", goto_first = "", goto_last = "", goto_next = "", goto_prev = "" },
-    })
-  end,
-  keys = {
-    { "gh", function() MiniDiff.toggle_overlay() end, desc = "MiniDiff: toggle overlay" },
+    },
+    keys = { { "gh", [[<cmd>lua require("mini.diff").toggle_overlay()<CR>]], desc = "MiniDiff: toggle overlay" } },
   },
 }

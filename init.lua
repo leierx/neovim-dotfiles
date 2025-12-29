@@ -1,7 +1,7 @@
+require("autocmd")
+require("filetypes")
 require("keymap")
 require("options")
-require("autocmd")
-require("lsp")
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -30,3 +30,4 @@ require("lazy").setup({
   -- automagically check for updates, but dont notify me
   checker = { enabled = true, notify = false },
 })
+

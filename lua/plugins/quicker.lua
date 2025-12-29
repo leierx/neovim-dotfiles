@@ -7,7 +7,4 @@ return {
       { "<", function() require("quicker").collapse() end, desc = "Collapse quickfix context" },
     },
   },
-  keys = {
-    { "<leader>c", function() require("quicker").toggle() end, desc = "Toggle quickfix" },
-  },
 }

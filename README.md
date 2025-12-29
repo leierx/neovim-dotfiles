@@ -1,3 +1,4 @@
- - [ ] more lsp's
- - [ ] autocomplete
+ - [x] more lsp's
+ - [x] autocomplete
  - [ ] popup terminal
+ - [ ] fix paste binding

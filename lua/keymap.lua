@@ -1,31 +1,38 @@
+local k = vim.keymap
+
 -- leader key
 vim.g.mapleader = vim.keycode("<Space>")
 
 -- disable arrow keys
-vim.keymap.set({ "n", "i", "v" }, "<Up>", "<Nop>")
-vim.keymap.set({ "n", "i", "v" }, "<Down>", "<Nop>")
-vim.keymap.set({ "n", "i", "v" }, "<Left>", "<Nop>")
-vim.keymap.set({ "n", "i", "v" }, "<Right>", "<Nop>")
+k.set({ "n", "i", "v" }, "<Up>", "<Nop>")
+k.set({ "n", "i", "v" }, "<Down>", "<Nop>")
+k.set({ "n", "i", "v" }, "<Left>", "<Nop>")
+k.set({ "n", "i", "v" }, "<Right>", "<Nop>")
 
--- Paste over selection without yanking it
-vim.keymap.set("x", "p", '"_dP')
+-- Clear search highlight with escape
+k.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
+
+-- Visual paste without overwriting your yank register
+-- k.set("x", "p", [["_dP]], { desc = "Paste (keep register)" })
+-- k.set("x", "P", [["_dP]], { desc = "Paste (keep register)" })
+
+-- quickfix
+k.set("n", "<leader>co", "<cmd>copen<CR>", { desc = "Quickfix: open" })
+k.set("n", "<leader>cn", "<cmd>cnext<CR>zz", { desc = "Quickfix: next" })
+k.set("n", "<leader>cp", "<cmd>cprev<CR>zz", { desc = "Quickfix: prev" })
 
 -- Center screen on jumps
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
+k.set("n", "<C-d>", "<C-d>zz")
+k.set("n", "<C-u>", "<C-u>zz")
 
--- Visual: normalize spacing + trim trailing whitespace + clear search highlight
-vim.keymap.set("x", "ss", [[:s/\S\zs\s\+/ /ge | keeppatterns '<,'>s/\s\+$//e | nohlsearch<CR>]], { desc = "Normalize spacing" })
+-- normalize spacing + trim trailing whitespace + clear search highlight
+k.set("n", "ss", [[:%s/\S\zs\s\+/ /g | %s/\s\+$//e | nohlsearch<CR>]], { desc = "Normalize spacing" })
 
 -- Keep selection when indenting
-vim.keymap.set("v", "<", "<gv")
-vim.keymap.set("v", ">", ">gv")
+k.set("v", "<", "<gv")
+k.set("v", ">", ">gv")
 
 -- save & write
-vim.keymap.set("n", "<leader>w", vim.cmd.write, { desc = "Save buffer" })
-vim.keymap.set("n", "<leader>q", vim.cmd.quitall, { desc = "Quit all" })
-vim.keymap.set("n", "<C-q>", function() vim.api.nvim_buf_delete(0, {}) end, { desc = "Close buffer" })
-
--- yank / paste without touching system clipboard (relies on vim.opt.clipboard = "unnamedplus")
-vim.keymap.set({ "n", "x" }, "gy", '"0y', { desc = "Yank (Vim register only)" })
-vim.keymap.set({ "n", "x" }, "gp", '"0p', { desc = "Paste (Vim register only)" })
+k.set("n", "<leader>w", vim.cmd.write, { desc = "Save buffer" })
+k.set("n", "<leader>q", vim.cmd.quitall, { desc = "Quit all" })
+k.set("n", "<C-q>", function() vim.api.nvim_buf_delete(0, {}) end, { desc = "Close buffer" })
