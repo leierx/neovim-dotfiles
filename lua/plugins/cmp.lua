@@ -17,7 +17,6 @@ return {
     },
     completion = {
       documentation = { auto_show = false },
-      range = "full",
       menu = {
         draw = {
           components = {

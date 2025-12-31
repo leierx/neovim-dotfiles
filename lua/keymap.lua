@@ -36,3 +36,6 @@ k.set("v", ">", ">gv")
 k.set("n", "<leader>w", vim.cmd.write, { desc = "Save buffer" })
 k.set("n", "<leader>q", vim.cmd.quitall, { desc = "Quit all" })
 k.set("n", "<C-q>", function() vim.api.nvim_buf_delete(0, {}) end, { desc = "Close buffer" })
+
+-- Alt-t: toggle in both normal + terminal mode
+k.set({ "n", "t" }, "<leader><CR>", function() require("floaterminal").toggle_terminal() end, { desc = "Terminal: toggle" })

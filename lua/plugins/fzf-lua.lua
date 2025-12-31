@@ -12,6 +12,12 @@ return {
   opts = {
     fzf_opts = {
       ["--cycle"] = true,
-    }
+    },
+    keymap = {
+      fzf = {
+        true,
+        ["ctrl-q"] = "select-all+accept", -- Use <c-q> to select all items and add them to the quickfix list
+      },
+    },
   }
 }
