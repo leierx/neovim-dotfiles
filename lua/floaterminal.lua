@@ -28,7 +28,7 @@ M.create_window = function ()
   }
 
   -- create new or reuse same buffer
-  local buf = vim.api.nvim_buf_is_valid(M.state.buffer) and M.state.buffer or vim.api.nvim_create_buf(false, true)
+  local buf = vim.api.nvim_buf_is_valid(M.state.buffer) and M.state.buffer or vim.api.nvim_create_buf(false, false)
   assert(buf ~= 0, "nvim_create_buf() failed")
 
   -- create window
@@ -38,10 +38,14 @@ M.create_window = function ()
   -- start terminal
   if vim.bo.buftype ~= "terminal" then
     vim.cmd.terminal()
-    -- disable plugin stuff
-    vim.b.miniindentscope_disable = true
-    vim.b.minicursorword_disable = true
+    -- buffer options
+    vim.api.nvim_buf_set_var(buf, "miniindentscope_disable", true)
+    vim.api.nvim_buf_set_var(buf, "minicursorword_disable", true)
+    vim.api.nvim_set_option_value("buflisted", false, { buf = buf })
+    vim.api.nvim_set_option_value("bufhidden", "hide", { buf = buf })
+    vim.api.nvim_set_option_value("modifiable", false, { buf = buf })
   end
+
   -- start insert
   vim.cmd.startinsert()
 
@@ -53,7 +57,7 @@ M.create_window = function ()
       return
     end
 
-    M.state.timer:start(200, 0, function() vim.schedule(M.hide) end)
+    M.state.timer:start(150, 0, function() vim.schedule(M.hide) end)
   end, { buffer = buf })
 
   vim.keymap.set("n", "<Esc>", function() M.hide() end, { buffer = buf })
