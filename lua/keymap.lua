@@ -12,10 +12,6 @@ k.set({ "n", "i", "v" }, "<Right>", "<Nop>")
 -- Clear search highlight with escape
 k.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
 
--- Visual paste without overwriting your yank register
--- k.set("x", "p", [["_dP]], { desc = "Paste (keep register)" })
--- k.set("x", "P", [["_dP]], { desc = "Paste (keep register)" })
-
 -- quickfix
 k.set("n", "<leader>co", "<cmd>copen<CR>", { desc = "Quickfix: open" })
 k.set("n", "<leader>cn", "<cmd>cnext<CR>zz", { desc = "Quickfix: next" })
@@ -38,4 +34,4 @@ k.set("n", "<leader>q", vim.cmd.quitall, { desc = "Quit all" })
 k.set("n", "<C-q>", function() vim.api.nvim_buf_delete(0, {}) end, { desc = "Close buffer" })
 
 -- Alt-t: toggle in both normal + terminal mode
-k.set({ "n", "t" }, "<leader><CR>", function() require("floaterminal").toggle_terminal() end, { desc = "Terminal: toggle" })
+k.set("n", "<leader><CR>", function() require("floaterminal").toggle_terminal() end, { desc = "Terminal: toggle" })
